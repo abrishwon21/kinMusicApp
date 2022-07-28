@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "898355390271",
+    "firebase_url": "https://kinideas-firebase-default-rtdb.firebaseio.com",
+    "project_id": "kinideas-firebase",
+    "storage_bucket": "kinideas-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898355390271:android:cba9a6427240b06bc9558a",
+        "android_client_info": {
+          "package_name": "com.example.clientapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898355390271-9tme6jp7ctuefoqd9hnbcqna0e9u0sfo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOyUalvNlaJqOf59FQ8dIzgZ70JOVymR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898355390271-9tme6jp7ctuefoqd9hnbcqna0e9u0sfo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
