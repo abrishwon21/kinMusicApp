@@ -2,6 +2,7 @@ import 'package:clientapp/modules/screens/homePage.dart';
 import 'package:clientapp/modules/screens/loginScreen.dart';
 import 'package:clientapp/modules/screens/mainScreen.dart';
 import 'package:clientapp/modules/screens/players/musicDetail.dart';
+import 'package:clientapp/modules/screens/user_account/signIn.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,7 +15,7 @@ class AuthService {
         if (snapshot.hasData) {
           return MainScreen();
         } else {
-          return LoginScreen();
+          return SignInPage();
         }
       },
     );
@@ -41,10 +42,38 @@ class AuthService {
   signUp(email, password) {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password)
-        .then((user) => print("signed in"))
+        .then((user){
+          return SignInPage();
+        })
         .catchError((e) {
       print(e);
     });
+  }
+
+  SignInWithGoogle() async {
+    final GoogleSignInAccount? googleUser =
+        await GoogleSignIn(scopes: <String>["email"]).signIn();
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+    SignUpWithGoogle() async {
+    final GoogleSignInAccount? googleUser =
+        await GoogleSignIn(scopes: <String>["email"]).signIn();
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
 

@@ -1,37 +1,35 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:clientapp/modules/screens/players/musicFiles/music_audio_file.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:clientapp/modules/screens/Podcasts/podcastFile/player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_randomcolor/flutter_randomcolor.dart';
 
-class MusicDetailScreen extends StatefulWidget {
-  const MusicDetailScreen({Key? key}) : super(key: key);
+class PodcastDetails extends StatefulWidget {
+  const PodcastDetails({Key? key}) : super(key: key);
 
   @override
-  State<MusicDetailScreen> createState() => _MusicDetailScreenState();
+  State<PodcastDetails> createState() => _PodcastDetailsState();
 }
 
-class _MusicDetailScreenState extends State<MusicDetailScreen> {
-  AudioPlayer advancedMusicPlayer = AudioPlayer();
+class _PodcastDetailsState extends State<PodcastDetails> {
+    AudioPlayer advancedPodcastPlayer = AudioPlayer();
   @override
   void initState() {
-    advancedMusicPlayer = AudioPlayer();
+    advancedPodcastPlayer = AudioPlayer();
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: Colors.grey,
-      body: Stack(
-        children: [
-          Positioned(
+        body: Stack(
+      alignment: Alignment.center,
+      children: [
+               Positioned(
             top: 0,
             left: 0,
             right: 0,
@@ -78,19 +76,20 @@ class _MusicDetailScreenState extends State<MusicDetailScreen> {
                 child: Column(children: [
                   SizedBox(height: screenHeight * 0.1),
                   Text(
-                    "Tikur sew",
+                    "Business",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                   ),
-                  Text("Teddy Afro", style: TextStyle(fontSize: 16)),
+                  Text("Elias Amelga", style: TextStyle(fontSize: 16)),
 
-                  //now render audio player here
-                  MusicAudioFile(advancedMusicPlayer: advancedMusicPlayer)
+                 PodcastAudioFile(advancedPodcastPlayer: advancedPodcastPlayer)
                 ]),
               )),
-          Positioned(
+
+
+               Positioned(
               left: (screenWidth - 150) / 2,
               right: (screenWidth - 150) / 2,
               top: screenHeight * 0.12,
@@ -115,58 +114,14 @@ class _MusicDetailScreenState extends State<MusicDetailScreen> {
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white, width: 1.0),
                         image: DecorationImage(
-                          image: AssetImage('assets/images/tedyafro.jpg'),
+                          image: AssetImage('/elias.jpg'),
                           fit: BoxFit.cover,
                         )),
                   ),
                 ),
               )),
-//start of elevated container
-          /*        Positioned(
-            top: screenHeight * 0.46,
-            left: (screenWidth - 240) / 2,
-            right: (screenWidth - 240) / 2,
-            height: screenHeight / 3,
-            child: Container(
-                margin: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black,
-                      blurRadius: 2.0,
-                      spreadRadius: 0.0,
-                      offset:
-                          Offset(2.0, 2.0), // shadow direction: bottom right
-                          
-                    ),
-                    
-                  ],
-                  
-                ),
-                child: Container(
-                    width: 240,
-                   
-                    child:SingleChildScrollView(
-                   
-                   child: Column(
-                      children: [
-                        Text("My lyrics will go here"),
-                        Text("My lyrics will go here"),
-                        Text("My lyrics will go here"),
-                        Text("My lyrics will go here"),
-                      ],
-                    ),
-                    )
 
-                    ) // child widget, replace with your own
-                ),
-          )
-*/
-//end of elevated container
-        ],
-      ),
-    );
+     ],
+    ));
   }
 }

@@ -1,8 +1,17 @@
 import 'package:clientapp/core/auths/auth_service.dart';
 import 'package:clientapp/core/provider/album_provider.dart';
+import 'package:clientapp/core/provider/podcast_player_provider.dart';
 import 'package:clientapp/modules/screens/mainScreen.dart';
 
 import 'package:clientapp/modules/screens/welcomePage.dart';
+import 'package:clientapp/screens/musics/music_details.dart';
+import 'package:clientapp/screens/now_playing/now_playing_music.dart';
+import 'package:clientapp/screens/musics/music_details.dart';
+//import 'package:clientapp/screens/now_playing/single_music_player.dart';
+import 'package:clientapp/screens/radio.dart';
+import 'package:clientapp/services/providers/SingleMusicPlayer.dart';
+import 'package:clientapp/services/providers/music_player.dart';
+import 'package:clientapp/services/providers/radio_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -13,25 +22,22 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
   /*
-   <script>
-  const firebaseConfig = {
+   const firebaseConfig = {
     apiKey: "AIzaSyAGLKuYoONwENdZ7nhyiym7Bio_D-6cG04",
     authDomain: "kinideas-firebase.firebaseapp.com",
     databaseURL: "https://kinideas-firebase-default-rtdb.firebaseio.com",
     projectId: "kinideas-firebase",
     storageBucket: "kinideas-firebase.appspot.com",
     messagingSenderId: "898355390271",
-    appId: "1:898355390271:web:997820192699342bc9558a",
-    measurementId: "G-6XHVX08LP3"
+    appId: "1:898355390271:web:f6615c4cf02440b5c9558a",
+    measurementId: "G-J3W0EJ73VG"
   };
- // firebase.initiallizeApp(firebaseConfig)
-</script>
 */
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: FirebaseOptions(
       apiKey: "AIzaSyAGLKuYoONwENdZ7nhyiym7Bio_D-6cG04",
-      appId: "1:898355390271:web:997820192699342bc9558a",
+      appId: "1:898355390271:web:f6615c4cf02440b5c9558a",
       messagingSenderId: "898355390271",
       projectId: "kinideas-firebase",
       storageBucket: "kinideas-firebase.appspot.com",
@@ -40,12 +46,19 @@ void main() async {
     await Firebase.initializeApp();
   }
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<PostDataProvider>(create: (_)=>PostDataProvider())
-      ],
     
-   child: MyApp(),
+    MultiProvider(
+      child: MyApp(),
+      providers: [
+        ChangeNotifierProvider(create: (_)=>PostDataProvider()),
+        ChangeNotifierProvider(create: (_)=>MusicPlayerProvider()),
+        ChangeNotifierProvider(create: (_)=>RadioProvider()),
+        ChangeNotifierProvider(create: (_)=>GoogleSignInProvider()),
+        ChangeNotifierProvider(create: (_)=>MusicPlayerProvider()),
+        //ChangeNotifierProvider(create: (_)=>SingleMusicPlayer())
+      ],
+   
+   
   )
   
   );
@@ -56,24 +69,26 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context)=>ChangeNotifierProvider(create: (context)=>
-  GoogleSignInProvider(),
-  child: MaterialApp(
+  Widget build(BuildContext context)
+     {
+      return MaterialApp(
+      
+        title: 'Kin Music',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            // This is the theme of your application.
+            //
+            scaffoldBackgroundColor: Colors.grey.shade100,
+        
+            primarySwatch: Colors.grey,
+          ),
+        //home: SingleMusicDetailScreen(),
+      home: AuthService().handleAuth()
     
-      title: 'Kin Music',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          // This is the theme of your application.
-          //
-          scaffoldBackgroundColor: Colors.grey.shade100,
-       
-          primarySwatch: Colors.grey,
-        ),
-       // home: MainScreen(),
-    home: MainScreen()
-     
-  )
-  );
+      
+      // )
+        );
+      }
 }
 
 

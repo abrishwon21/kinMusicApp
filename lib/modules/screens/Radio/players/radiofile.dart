@@ -21,8 +21,8 @@ class _RadioStreamerState extends State<RadioStreamer> {
     setState() {
       radioPlayer.setChannel(
           title: "Fana",
-          url:
-              "https://www.fanabc.com/english/live/#1570532799165-c7292457-e892",
+          url:"https://liveonlineradio.net/player/?p=bisrat-fm-101-1",
+              //"https://www.fanabc.com/english/live/#1570532799165-c7292457-e892",
           imagePath: '');
     }
 

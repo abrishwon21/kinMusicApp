@@ -58,6 +58,8 @@ dependencies:
   # radio packages
   flutter_radio_player: ^1.1.0
   radio_player: ^0.7.0
+  assets_audio_player: ^3.0.5
+  json_annotation: ^4.6.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

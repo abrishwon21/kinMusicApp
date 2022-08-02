@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     InkWell(
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
-                            AuthService().signIn(email, password);
+                            AuthService().signUp(email, password);
                           }
                         },
                         child: Container(

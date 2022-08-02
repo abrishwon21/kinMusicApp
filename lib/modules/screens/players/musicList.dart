@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 //import 'package:clientapp/core/provider/album_provider.dart';
+import 'package:clientapp/core/services/api_services.dart';
 import 'package:clientapp/modules/screens/players/musicDetail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,49 +21,44 @@ class MusicList extends StatefulWidget {
 }
 
 class _MusicListState extends State<MusicList> {
-  /*@override
-  void initState() {
-    super.initState();
-    final albumList = Provider.of<AlbumProvider>(context, listen: false);
-    albumList.fetchAlbum(context);
-  }*/
   @override
   void initState() {
     super.initState();
-    final postMdl = Provider.of<PostDataProvider>(context, listen: false);
-    postMdl.getPostData(context);
+    //getMusics
+    print(getMusics());
   }
+
   Widget build(BuildContext context) {
     //final albList = Provider.of<AlbumProvider>(context, listen: true).kAlbumModel;
     final postMdl = Provider.of<PostDataProvider>(context);
-    return postMdl.loading? Center(
-          
-          child: CircularProgressIndicator(),
-        ) :ListView.builder(
-        itemCount: 30,
-        scrollDirection:Axis.horizontal,
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-              onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MusicDetailScreen()),
-                  );
-              },
-              
-              child: Card(
-                color: Colors.grey,
-                
-                child: Column(children: [
-                  Text(postMdl.post.title??''),
-                  SizedBox(height: 10.0,),
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    child: Text(postMdl.post.body??''))
-
-                ]),
-              )
-              );
-        });
+    return postMdl.loading
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
+        : ListView.builder(
+            itemCount: 30,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MusicDetailScreen()),
+                    );
+                  },
+                  child: Card(
+                    color: Colors.grey,
+                    child: Column(children: [
+                      Text(postMdl.post.title ?? ''),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                          margin: EdgeInsets.all(20),
+                          child: Text(postMdl.post.body ?? ''))
+                    ]),
+                  ));
+            });
   }
 }
